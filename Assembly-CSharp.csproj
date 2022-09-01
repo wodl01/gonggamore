@@ -9,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{32C3BDE6-E125-3128-82C1-25D0441455A3}</ProjectGuid>
+    <ProjectGuid>{D22E8A9B-E2DE-F588-A9A7-826C971B4233}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -56,12 +56,13 @@
     <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\RewardAd.cs" />
     <Compile Include="Assets\Resource\Script\FinalScript.cs" />
     <Compile Include="Assets\Resource\Script\BossScript.cs" />
     <Compile Include="Assets\Resource\Script\MenuManager.cs" />
     <Compile Include="Assets\Resource\Script\NewBehaviourScript.cs" />
     <Compile Include="Assets\Resource\Script\PoopScript.cs" />
-    <Compile Include="Assets\Resource\Script\SceneManager.cs" />
+    <Compile Include="Assets\Resource\Script\SceneManage.cs" />
     <Compile Include="Assets\ObjectFollowScript.cs" />
     <Compile Include="Assets\RandomSprite.cs" />
     <Compile Include="Assets\InGameManager.cs" />
@@ -70,8 +71,20 @@
     <Compile Include="Assets\Shop.cs" />
     <Compile Include="Assets\Resource\Script\LetterSpacing.cs" />
     <Compile Include="Assets\Resource\Script\RandomTextScript.cs" />
+    <Compile Include="Assets\BannerAd.cs" />
     <Compile Include="Assets\Resource\Script\PlayFabScript.cs" />
     <Compile Include="Assets\Resource\Script\PlayerScript.cs" />
+    <Compile Include="Assets\Resource\Script\CameraResolution.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\GoogleMobileAds\GoogleMobileAds.Common.dll" />
+    <None Include="Assets\GoogleMobileAds\GoogleMobileAds.dll" />
+    <None Include="Assets\GoogleMobileAds\GoogleMobileAds.iOS.dll" />
+    <None Include="Assets\GoogleMobileAds\GoogleMobileAds_version-7.2.0_manifest.txt" />
+    <None Include="Assets\GoogleMobileAds\GoogleMobileAds.Core.dll" />
+    <None Include="Assets\GoogleMobileAds\link.xml" />
+    <None Include="Assets\GoogleMobileAds\GoogleMobileAds.Unity.dll" />
+    <None Include="Assets\GoogleMobileAds\GoogleMobileAds.Android.dll" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
@@ -286,6 +299,18 @@
     </Reference>
     <Reference Include="UnityEditor.UnityConnectModule">
       <HintPath>D:\UnityHub\2020.3.36f1\Editor\Data\Managed\UnityEngine\UnityEditor.UnityConnectModule.dll</HintPath>
+    </Reference>
+    <Reference Include="GoogleMobileAds.Core">
+      <HintPath>Assets\GoogleMobileAds\GoogleMobileAds.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="GoogleMobileAds">
+      <HintPath>Assets\GoogleMobileAds\GoogleMobileAds.dll</HintPath>
+    </Reference>
+    <Reference Include="GoogleMobileAds.Unity">
+      <HintPath>Assets\GoogleMobileAds\GoogleMobileAds.Unity.dll</HintPath>
+    </Reference>
+    <Reference Include="GoogleMobileAds.Common">
+      <HintPath>Assets\GoogleMobileAds\GoogleMobileAds.Common.dll</HintPath>
     </Reference>
     <Reference Include="netstandard">
       <HintPath>D:\UnityHub\2020.3.36f1\Editor\Data\NetStandard\ref\2.0.0\netstandard.dll</HintPath>
@@ -725,16 +750,20 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="PlayFabSDKEditor.csproj">
-      <Project>{DD908076-CF29-92E8-A596-444BF7E6E5D2}</Project>
+      <Project>{D6FF5F78-2578-B97F-1307-DDB72A41031D}</Project>
       <Name>PlayFabSDKEditor</Name>
     </ProjectReference>
     <ProjectReference Include="PlayFabEditorExtensions.csproj">
-      <Project>{2E6DC839-435B-86A5-F3EF-D0F7EAA645D1}</Project>
+      <Project>{66334E4C-026A-C96B-012E-75DA8D65A1F9}</Project>
       <Name>PlayFabEditorExtensions</Name>
     </ProjectReference>
     <ProjectReference Include="PlayFab.csproj">
-      <Project>{3AF55660-CCC9-AAC2-E268-B941A1B5D63D}</Project>
+      <Project>{3BC3FEBF-D271-CB57-1B4F-61AD8E1758A2}</Project>
       <Name>PlayFab</Name>
+    </ProjectReference>
+    <ProjectReference Include="GoogleMobileAds.Editor.csproj">
+      <Project>{DB1DBCDC-B17D-A6DF-62CD-2C41612DB6FC}</Project>
+      <Name>GoogleMobileAds.Editor</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

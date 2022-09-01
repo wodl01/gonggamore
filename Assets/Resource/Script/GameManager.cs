@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System.IO;
+using UnityEngine.SceneManagement;
 using System.Security.Cryptography;
 //using System.Numerics;
 
@@ -183,10 +184,12 @@ public class GameManager : MonoBehaviour
         scoreText = GameObject.Find("ScoreText").GetComponent<Text>();
         moneyText = GameObject.Find("MoneyText").GetComponent<Text>();
         playerScript = GameObject.Find("Player").GetComponent<PlayerScript>();
+        Time.timeScale = 1;
+        isPauseGame = false;
         gameStart = true;
         isGameOver = false;
         isRepeatMode = false;
-        isPauseGame = false;
+        
         bossTime = false;
         adActive = false;
         resurrectionChance = true;
@@ -421,6 +424,7 @@ public class GameManager : MonoBehaviour
         if (money < 0)
             userData.inGameMoney = 0;
 
+        if(SceneManager.GetActiveScene().buildIndex == 0)
         menuManager.inGameMoneyText.text = "통장잔고:" + TextChanger(userData.inGameMoney) + "원";
     }
     public int GetInGameMoneyValue()
@@ -520,26 +524,43 @@ public class GameManager : MonoBehaviour
     {
         if (hp < 1)
         {
-            isGameOver = true;
-            gameStart = false;
-            DestroyAllPrefaps();
+
             if (resurrectionChance)
             {
                 resurrectionChance = false;
-                inGameManager.ResurrectionChancePanel(true);
-                return;
+                if(GetComponent<RewardAd>().isReady && userData.inGameMoney >= 5000000)
+                {
+                    inGameManager.ResurrectionChancePanel(true);
+                    return;
+                }
             }
             else
             {
-                Invoke("SettingFinalPanel", 0.05f);
+                Invoke("GameOver", 0.05f);
             }
 
-            SceneManager.instance.ChangeScene(2);
+            SceneManage.instance.ChangeScene(2);
         }
     }
 
-    void SettingFinalPanel()
+    public void GameOver()
     {
+        if (adActive)
+        {
+            adActive = false;
+            //GetComponent<RewardAd>().ShowAd();
+            return;
+        }
+        else
+        {
+
+            SettingFinalPanel();
+        }
+    }
+    public void SettingFinalPanel()
+    {
+        gameStart = false;
+        isGameOver = true;
         FinalScript finalScript = FinalScript.instance;
 
         if (userData.bestScore < score + money)
@@ -557,9 +578,9 @@ public class GameManager : MonoBehaviour
         if(userData.bonusItemAmount > 0)
         {
             userData.bonusItemAmount--;
-            finalScore += finalScore;
             finalScript.bonusScoreText.gameObject.SetActive(true);
             finalScript.bonusScoreText.text = "보너스 아이템!" + finalScore + "X2";
+            finalScore += finalScore;
         }
         else finalScript.bonusScoreText.gameObject.SetActive(false);
 

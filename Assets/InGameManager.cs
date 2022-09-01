@@ -11,6 +11,8 @@ public class InGameManager : MonoBehaviour
     private GameObject pausePanel;
 
     private GameManager gameManager;
+    [SerializeField]
+    private PlayerScript playerScript;
 
     public GameObject itemBtn;
 
@@ -78,8 +80,10 @@ public class InGameManager : MonoBehaviour
         if (active)
         {
             PauseGame(true);
+            resurrectionPanel.transform.GetChild(3).GetComponent<Text>().text = "ÅëÀåÀÜ°í:" + GameManager.TextChanger(gameManager.GetInGameMoneyValue()) + "¿ø";
+
             resurrectionMoneyBtn.interactable = gameManager.GetInGameMoneyValue() >= 5000000;
-            resurrectionAdBtn.interactable = Application.internetReachability != NetworkReachability.NotReachable;
+            resurrectionAdBtn.interactable = gameManager.GetComponent<RewardAd>().isReady;
 
             if(resurrectionMoneyBtn.interactable || resurrectionAdBtn.interactable)
             {
@@ -97,15 +101,20 @@ public class InGameManager : MonoBehaviour
         gameManager.AddInGameMoneyValue(-5000000);
 
         gameManager.SetHpValue(3);
-
-        PauseGame(false);
     }
     public void ResurrectionAdBtn()
     {
-        gameManager.SetHpValue(4);
+        gameManager.adActive = true;
 
+        gameManager.SetHpValue(4);
+    }
+
+    public void InputResurrectionBtn()
+    {
         PauseGame(false);
 
-        gameManager.adActive = true;
+        playerScript.SetInvincibility(true);
+
+        ResurrectionChancePanel(false);
     }
 }

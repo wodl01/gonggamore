@@ -50,7 +50,10 @@ public class PlayFabScript : MonoBehaviour
         if (name == null)
             menuManager.nickNamePanel.SetActive(true);
         else
+        {
             menuManager.playerNickNameText.text = name;
+            GameManager.instance.PlayerProfileUpdate();
+        }
     }
     public void SubmitNameButton()
     {
