@@ -40,7 +40,6 @@ public class PlayerScript : MonoBehaviour
     private void Start()
     {
         gameManager = GameManager.instance;
-        gameManager.GameStart();
  
         SetInvincibility(true);
     }

@@ -25,7 +25,7 @@ public class BannerAd : MonoBehaviour
 #endif
 
         // Create a 320x50 banner at the top of the screen.
-        this.bannerView = new BannerView(adUnitId, AdSize.SmartBanner, AdPosition.Bottom );
+        this.bannerView = new BannerView(adUnitId, AdSize.Banner, AdPosition.Bottom );
 
         // Create an empty ad request.
         AdRequest request = new AdRequest.Builder().Build();

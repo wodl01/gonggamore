@@ -13,6 +13,8 @@ public class SceneManage : MonoBehaviour
     public void ChangeScene(int index)
     {
         SceneManager.LoadSceneAsync(index);
+
+        //GameManager.instance.GetComponent<RewardAd>().LoadRewardAd();
     }
 
     public void LeaderboardBtn()

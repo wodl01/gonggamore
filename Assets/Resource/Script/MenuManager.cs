@@ -18,10 +18,13 @@ public class MenuManager : MonoBehaviour
     [SerializeField] Text bestScoreText;
     public Text inGameMoneyText;
     public Text playerNickNameText;
+    public Text playerAbilityTitleText;
+    public Text playerAbilityInfoText;
     [SerializeField] Transform rowsParent;
     public GameObject leaderboardPanel;
     public GameObject nickNamePanel;
     public InputField nameInputField;
+    public Text nickNameCode;
     public Text nameErrorText;
 
     public Text lvText;
@@ -45,6 +48,7 @@ public class MenuManager : MonoBehaviour
 
         playfabScript.rowsParent = rowsParent;
 
+        playfabScript.Login();
 
         gameManager.PlayerProfileUpdate();
     }

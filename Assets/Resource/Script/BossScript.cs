@@ -32,6 +32,8 @@ public class BossScript : MonoBehaviour
     [Header("BossState")]
     private bool isBossCleared;
     private bool takeHp;
+    [SerializeField]
+    private bool stop;
 
     [SerializeField] GameObject[] bossObstacles;
 
@@ -101,6 +103,7 @@ public class BossScript : MonoBehaviour
 
     public void SummonObjectToRandomPos(int obstacleCode)
     {
+        if (stop) return;
         Vector3 pos = new Vector3(Random.Range(-3.2f, 3.2f), 7, 0);
         GameObject curObject = Instantiate(bossObstacles[obstacleCode], pos, Quaternion.identity);
         if(curObject.GetComponent<PoopScript>() != null)
@@ -131,14 +134,20 @@ public class BossScript : MonoBehaviour
         sightSpeed = Random.Range(0.02f, 0.04f);
     }
 
+    public void StopBoss(bool active)
+    {
+        stop = active;
+        bossAnimator.speed = active ? 0 : 1;
+    }
+
     [SerializeField] float rightBorder;
     [SerializeField] float leftBorder;
     private void FixedUpdate()
     {
-        if (takeHp)
+        if (takeHp && !stop)
             AddBossHpValue(-Time.deltaTime);
 
-        if (sightOn)
+        if (sightOn && !stop)
         {
             bossSightOb.transform.Translate(new Vector3(sightGoRight ? sightSpeed : -sightSpeed, 0, 0));
             Vector3 worldPos = Camera.main.WorldToViewportPoint(bossSightOb.transform.position);

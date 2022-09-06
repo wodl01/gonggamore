@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.IO;
 using UnityEngine.SceneManagement;
+using PlayFab.ClientModels;
+using PlayFab;
 using System.Security.Cryptography;
 //using System.Numerics;
 
@@ -109,6 +111,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] int[] maxExp;
     [SerializeField] Sprite[] profileThumbnails;
     [SerializeField] string[] gradeName;
+    [SerializeField] string[] abilityInfo;
+    [SerializeField] float[] bonusValue;
 
     public UserDatas userData;
     [SerializeField]
@@ -116,7 +120,6 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-
         if (instance != null)
         {
             Destroy(gameObject);
@@ -127,6 +130,7 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
 
         Application.targetFrameRate = 60;
+        Screen.sleepTimeout = SleepTimeout.NeverSleep;
 
         playFabScript = GetComponent<PlayFabScript>();
     }
@@ -134,8 +138,13 @@ public class GameManager : MonoBehaviour
     {
         filePath = Application.persistentDataPath + "/WM3ko61Q0t83Uimdwp9ArhkmVE32TvV2.txt";
 
-        
+#if UNITY_EDITOR
+        testMode = true;
+#endif
+
         LoadData();
+
+        PlayerProfileUpdate();
     }
 
     public void SaveData()
@@ -172,6 +181,8 @@ public class GameManager : MonoBehaviour
         menuManager.profileThumbnailImage.sprite = profileThumbnails[userData.curPlayerLv];
         menuManager.gradeText.text = gradeName[userData.curPlayerLv];
         menuManager.lvText.text = "Lv." + userData.curPlayerLv.ToString();
+        menuManager.playerAbilityInfoText.text = abilityInfo[userData.curPlayerLv];
+        menuManager.playerAbilityTitleText.text = "최종점수 +" + bonusValue[userData.curPlayerLv] + "%";
         menuManager.profileThumbnailImage.sprite = profileThumbnails[userData.curPlayerLv];
         menuManager.expPersentText.text = (((float)userData.curExp / (float)maxExp[userData.curPlayerLv]) * 100).ToString() + "%";
         menuManager.expSlider.value = ((float)userData.curExp / (float)maxExp[userData.curPlayerLv]);
@@ -195,6 +206,8 @@ public class GameManager : MonoBehaviour
         resurrectionChance = true;
         summonType = 0;
         curStage = 0;
+
+        inGameManager.scoreXText.SetActive(!PlayFabClientAPI.IsClientLoggedIn());
 
         curRepeatBossCoolTime = maxRepeatBossCoolTime;
         curPoopCool = Random.Range(0.2f, 1f);
@@ -515,11 +528,16 @@ public class GameManager : MonoBehaviour
 
 
         if (curStage == minScoreToNextStage.Length - 1)
+        {
+            Message("그것은 모두 꿈이였다(하드모드)");
             isRepeatMode = true;
+        }
+
 
         if (!isRepeatMode)
             curStage++;
     }
+    bool isAdActing;
     public void CheckGameOver()
     {
         if (hp < 1)
@@ -527,35 +545,43 @@ public class GameManager : MonoBehaviour
 
             if (resurrectionChance)
             {
+                isPauseGame = true;
+                gameStart = false;
                 resurrectionChance = false;
-                if(GetComponent<RewardAd>().isReady && userData.inGameMoney >= 5000000)
+                if(inGameManager.GetComponent<RewardAd>().rewardAd.IsLoaded() || userData.inGameMoney >= 5000000)
                 {
                     inGameManager.ResurrectionChancePanel(true);
                     return;
                 }
+                else
+                {
+                    SceneManage.instance.ChangeScene(2);
+                }
             }
             else
             {
-                Invoke("GameOver", 0.05f);
+                if (adActive)
+                {
+                    adActive = false;
+                    inGameManager.GetComponent<RewardAd>().ShowRewardAd();
+                }
+                else
+                {
+                    SceneManage.instance.ChangeScene(2);
+                }
             }
-
-            SceneManage.instance.ChangeScene(2);
         }
+    }
+    public void Resurrent()
+    {
+        isPauseGame = false;
+        gameStart = true;
     }
 
     public void GameOver()
     {
-        if (adActive)
-        {
-            adActive = false;
-            //GetComponent<RewardAd>().ShowAd();
-            return;
-        }
-        else
-        {
-
-            SettingFinalPanel();
-        }
+        SettingFinalPanel();
+ 
     }
     public void SettingFinalPanel()
     {
@@ -575,7 +601,11 @@ public class GameManager : MonoBehaviour
         finalScript.ScoreText.text = "점수:" + TextChanger(score).ToString();
         finalScript.finalMoneyText.text = "+" + TextChanger(money) + "원";
         finalScore = score + money;
-        if(userData.bonusItemAmount > 0)
+
+        int bonusUserValue = Mathf.RoundToInt((bonusValue[userData.curPlayerLv] / 100) * finalScore);
+        finalScript.bonusScoreText2.text = "캐릭터 보너스 +" + bonusUserValue + "점";
+        finalScore += bonusUserValue;
+        if (userData.bonusItemAmount > 0)
         {
             userData.bonusItemAmount--;
             finalScript.bonusScoreText.gameObject.SetActive(true);
@@ -586,11 +616,13 @@ public class GameManager : MonoBehaviour
 
         finalScript.finalScoreText.text = "최종점수:" + TextChanger(finalScore).ToString() + "점!";
 
-        AddExp(Mathf.RoundToInt(money / 10000));
+        AddExp(Mathf.RoundToInt((float)score / 100));
 
         SaveData();
 
         playFabScript.SendLeaderboard(finalScore);
+
+
     }
     public void UseItem(int itemCode)
     {
@@ -606,6 +638,21 @@ public class GameManager : MonoBehaviour
                 break;
         }
         SaveData();
+    }
+
+    string messageInfo;
+    public void Message(string message)
+    {
+        messageInfo = message;
+        StartCoroutine(MessageActive());
+
+    }
+    IEnumerator MessageActive()
+    {
+        inGameManager.messageOb.GetComponent<Text>().text = messageInfo;
+        inGameManager.messageOb.SetActive(true);
+        yield return new WaitForSeconds(3);
+        inGameManager.messageOb.SetActive(false);
     }
 
     private float curPoopCool;
@@ -669,7 +716,7 @@ public class GameManager : MonoBehaviour
                     curVirusCool -= Time.deltaTime;
                     if (curPoopCool < 0)
                     {
-                        float randomNum = Random.Range(gravityPerStage[curStage].z - 0.4f, gravityPerStage[curStage].z + 0.4f);
+                        float randomNum = Random.Range(gravityPerStage[curStage].z - 0.2f, gravityPerStage[curStage].z + 0.2f);
                         int index = isCoffeeTime ? 2 : 1;
                         SummonPoop();
                         curPoopCool = randomNum * index;

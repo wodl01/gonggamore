@@ -16,15 +16,13 @@ public class PlayFabScript : MonoBehaviour
     private void Awake()
     {
         instance = this;
+        Debug.Log(SystemInfo.deviceUniqueIdentifier);
     }
 
-    void Start()
+    public void Login()
     {
-        Login();
-    }
+        if (PlayFabClientAPI.IsClientLoggedIn()) return;
 
-    void Login()
-    {
         MenuManager.instance.loadingPanel.SetActive(true);
         var request = new LoginWithCustomIDRequest
         {
@@ -48,18 +46,25 @@ public class PlayFabScript : MonoBehaviour
 
         menuManager = MenuManager.instance;
         if (name == null)
+        {
+            menuManager.nickNameCode.text = "(" + SystemInfo.deviceUniqueIdentifier.Substring(0, 2) + ")";
             menuManager.nickNamePanel.SetActive(true);
+
+        }
+
         else
         {
             menuManager.playerNickNameText.text = name;
             GameManager.instance.PlayerProfileUpdate();
+
         }
     }
     public void SubmitNameButton()
     {
+        if (menuManager.nameInputField.text.Length < 3) return;
         var request = new UpdateUserTitleDisplayNameRequest
         {
-            DisplayName = menuManager.nameInputField.text,
+            DisplayName = menuManager.nameInputField.text + "(" + SystemInfo.deviceUniqueIdentifier.Substring(0,2) + ")",
         };
         PlayFabClientAPI.UpdateUserTitleDisplayName(request, OnDisplayNameUpdate, NickNameError);
     }
@@ -89,8 +94,9 @@ public class PlayFabScript : MonoBehaviour
     void OnDisplayNameUpdate(UpdateUserTitleDisplayNameResult result) 
     {
         Debug.Log("Update display name!");
-        MenuManager.instance.debugText.text = "Update display name!";
+        //MenuManager.instance.debugText.text = "Update display name!";
         menuManager.nickNamePanel.SetActive(false);
+        menuManager.playerNickNameText.text = menuManager.nameInputField.text + "(" + SystemInfo.deviceUniqueIdentifier.Substring(0, 2) + ")";
     }
 
     void OnError(PlayFabError error)
@@ -120,7 +126,6 @@ public class PlayFabScript : MonoBehaviour
     void OnLeaderboardUpdate(UpdatePlayerStatisticsResult result)
     {
         Debug.Log("Successfull leaderboard sent");
-        //MenuManager.instance.debugText.text = "Successfull leaderboard sent";
     }
 
     public void GetLeaderboard()

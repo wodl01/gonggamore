@@ -62,6 +62,7 @@
     <Compile Include="Assets\Resource\Script\MenuManager.cs" />
     <Compile Include="Assets\Resource\Script\NewBehaviourScript.cs" />
     <Compile Include="Assets\Resource\Script\PoopScript.cs" />
+    <Compile Include="Assets\Resource\Script\CameraResolution.cs" />
     <Compile Include="Assets\Resource\Script\SceneManage.cs" />
     <Compile Include="Assets\ObjectFollowScript.cs" />
     <Compile Include="Assets\RandomSprite.cs" />
@@ -74,7 +75,8 @@
     <Compile Include="Assets\BannerAd.cs" />
     <Compile Include="Assets\Resource\Script\PlayFabScript.cs" />
     <Compile Include="Assets\Resource\Script\PlayerScript.cs" />
-    <Compile Include="Assets\Resource\Script\CameraResolution.cs" />
+    <Compile Include="Assets\IntroScript.cs" />
+    <Compile Include="Assets\SoundManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\GoogleMobileAds\GoogleMobileAds.Common.dll" />
@@ -300,14 +302,14 @@
     <Reference Include="UnityEditor.UnityConnectModule">
       <HintPath>D:\UnityHub\2020.3.36f1\Editor\Data\Managed\UnityEngine\UnityEditor.UnityConnectModule.dll</HintPath>
     </Reference>
-    <Reference Include="GoogleMobileAds.Core">
-      <HintPath>Assets\GoogleMobileAds\GoogleMobileAds.Core.dll</HintPath>
-    </Reference>
     <Reference Include="GoogleMobileAds">
       <HintPath>Assets\GoogleMobileAds\GoogleMobileAds.dll</HintPath>
     </Reference>
     <Reference Include="GoogleMobileAds.Unity">
       <HintPath>Assets\GoogleMobileAds\GoogleMobileAds.Unity.dll</HintPath>
+    </Reference>
+    <Reference Include="GoogleMobileAds.Core">
+      <HintPath>Assets\GoogleMobileAds\GoogleMobileAds.Core.dll</HintPath>
     </Reference>
     <Reference Include="GoogleMobileAds.Common">
       <HintPath>Assets\GoogleMobileAds\GoogleMobileAds.Common.dll</HintPath>

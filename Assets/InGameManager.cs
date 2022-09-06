@@ -6,6 +6,8 @@ using UnityEngine.UI;
 public class InGameManager : MonoBehaviour
 {
     public static InGameManager instance;
+    [SerializeField]
+    private BossScript bossScript;
 
     [SerializeField]
     private GameObject pausePanel;
@@ -23,6 +25,9 @@ public class InGameManager : MonoBehaviour
     public GameObject resurrectionPanel;
     public Button resurrectionAdBtn;
     public Button resurrectionMoneyBtn;
+    public Slider timsSlider;
+    public GameObject messageOb;
+    public GameObject scoreXText;
 
     [SerializeField]
     private float resurrectionPanelCool;
@@ -50,10 +55,11 @@ public class InGameManager : MonoBehaviour
         //if (Input.GetKeyDown(KeyCode.Escape))
         //    PausePanelOn(!gameManager.isPauseGame);
 #endif
-        if (isResurrentionPanelOn)
+        if (resurrectionPanelCool > 0)
         {
             resurrectionPanelCool -= Time.deltaTime;
-            if(resurrectionPanelCool < 0)
+            timsSlider.value = resurrectionPanelCool / 10;
+            if (resurrectionPanelCool < 0)
                 gameManager.CheckGameOver();
         }
     }
@@ -77,13 +83,16 @@ public class InGameManager : MonoBehaviour
     public void ResurrectionChancePanel(bool active)
     {
         resurrectionPanel.SetActive(active);
+        if (gameManager.bossTime)
+            bossScript.StopBoss(active);
         if (active)
         {
-            PauseGame(true);
+
+            gameManager.DestroyAllPrefaps();
             resurrectionPanel.transform.GetChild(3).GetComponent<Text>().text = "ÅëÀåÀÜ°í:" + GameManager.TextChanger(gameManager.GetInGameMoneyValue()) + "¿ø";
 
             resurrectionMoneyBtn.interactable = gameManager.GetInGameMoneyValue() >= 5000000;
-            resurrectionAdBtn.interactable = gameManager.GetComponent<RewardAd>().isReady;
+            resurrectionAdBtn.interactable = GetComponent<RewardAd>().rewardAd.IsLoaded();
 
             if(resurrectionMoneyBtn.interactable || resurrectionAdBtn.interactable)
             {
@@ -111,7 +120,7 @@ public class InGameManager : MonoBehaviour
 
     public void InputResurrectionBtn()
     {
-        PauseGame(false);
+        gameManager.Resurrent();
 
         playerScript.SetInvincibility(true);
 
