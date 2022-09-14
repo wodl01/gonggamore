@@ -13,6 +13,8 @@ public class InGameManager : MonoBehaviour
     private GameObject pausePanel;
 
     private GameManager gameManager;
+
+    public GameObject UI;
     [SerializeField]
     private PlayerScript playerScript;
 
@@ -33,13 +35,16 @@ public class InGameManager : MonoBehaviour
     private float resurrectionPanelCool;
     private void Awake()
     {
-        instance = this;
+        if (instance == null)
+            instance = this;
+        else
+            Destroy(gameObject);
     }
 
     private void Start()
     {
         gameManager = GameManager.instance;
-
+        UI.SetActive(false);
         ItemBtnUpdate();
     }
 
@@ -59,8 +64,12 @@ public class InGameManager : MonoBehaviour
         {
             resurrectionPanelCool -= Time.deltaTime;
             timsSlider.value = resurrectionPanelCool / 10;
-            if (resurrectionPanelCool < 0)
-                gameManager.CheckGameOver();
+            if (resurrectionPanelCool < 0 && isResurrentionPanelOn)
+            {
+                SoundManager.instance.PlayRandomBGM();
+                SceneManage.instance.ChangeScene(2);
+            }
+
         }
     }
 
@@ -103,19 +112,21 @@ public class InGameManager : MonoBehaviour
             {
                 gameManager.CheckGameOver();
             }
+            SoundManager.instance.PlayBGM(0);
         }
+
     }
     public void ResurrectionMoneyBtn()
     {
         gameManager.AddInGameMoneyValue(-5000000);
-
+        isResurrentionPanelOn = false;
         gameManager.SetHpValue(3);
     }
     public void ResurrectionAdBtn()
     {
         gameManager.adActive = true;
-
-        gameManager.SetHpValue(4);
+        isResurrentionPanelOn = false;
+        gameManager.SetHpValue(3);
     }
 
     public void InputResurrectionBtn()
@@ -125,5 +136,7 @@ public class InGameManager : MonoBehaviour
         playerScript.SetInvincibility(true);
 
         ResurrectionChancePanel(false);
+
+        SoundManager.instance. PlayRandomBGM();
     }
 }

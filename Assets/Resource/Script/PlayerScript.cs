@@ -133,10 +133,12 @@ public class PlayerScript : MonoBehaviour
         {
             gameManager.GetDamaged();
             SetInvincibility(true);
+            SoundManager.instance.Play("Hit");
         }
         if (collision.tag == "Card")
         {
             gameManager.FeverTimeStart();
+            SoundManager.instance.Play("CardGet");
         }
         if (collision.tag == "TimeSlow")
         {

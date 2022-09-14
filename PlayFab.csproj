@@ -56,93 +56,93 @@
     <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\PlayFabSDK\Shared\Internal\ISerializer.cs" />
     <Compile Include="Assets\PlayFabSDK\Shared\Internal\wsaReflectionExtensions.cs" />
     <Compile Include="Assets\PlayFabSDK\Server\PlayFabEvents.cs" />
     <Compile Include="Assets\PlayFabSDK\Authentication\PlayFabAuthenticationModels.cs" />
-    <Compile Include="Assets\PlayFabSDK\Groups\PlayFabGroupsModels.cs" />
     <Compile Include="Assets\PlayFabSDK\Data\PlayFabDataAPI.cs" />
-    <Compile Include="Assets\PlayFabSDK\Events\PlayFabEventsModels.cs" />
-    <Compile Include="Assets\PlayFabSDK\Shared\Internal\Util.cs" />
-    <Compile Include="Assets\PlayFabSDK\Economy\PlayFabEconomyModels.cs" />
     <Compile Include="Assets\PlayFabSDK\Experimentation\PlayFabExperimentationAPI.cs" />
     <Compile Include="Assets\PlayFabSDK\Shared\Internal\PlayFabHttp\PlayFabHTTP.cs" />
     <Compile Include="Assets\PlayFabSDK\Economy\PlayFabEconomyAPI.cs" />
     <Compile Include="Assets\PlayFabSDK\Client\PlayFabClientModels.cs" />
-    <Compile Include="Assets\PlayFabSDK\Shared\Public\ISerializerPlugin.cs" />
     <Compile Include="Assets\PlayFabSDK\Shared\Public\PlayFabDataGatherer.cs" />
     <Compile Include="Assets\PlayFabSDK\Multiplayer\PlayFabEvents.cs" />
     <Compile Include="Assets\PlayFabSDK\Shared\Internal\PlayFabErrors.cs" />
     <Compile Include="Assets\PlayFabSDK\Events\PlayFabEventsAPI.cs" />
     <Compile Include="Assets\PlayFabSDK\Shared\Internal\PlayFabHttp\PlayFabWebRequest.cs" />
     <Compile Include="Assets\PlayFabSDK\Profiles\PlayFabProfilesInstanceAPI.cs" />
-    <Compile Include="Assets\PlayFabSDK\Economy\PlayFabEvents.cs" />
     <Compile Include="Assets\PlayFabSDK\Events\PlayFabEvents.cs" />
     <Compile Include="Assets\PlayFabSDK\Profiles\PlayFabProfilesModels.cs" />
-    <Compile Include="Assets\PlayFabSDK\Localization\PlayFabLocalizationAPI.cs" />
     <Compile Include="Assets\PlayFabSDK\Shared\Public\PlayFabLogger.cs" />
     <Compile Include="Assets\PlayFabSDK\Groups\PlayFabGroupsInstanceAPI.cs" />
     <Compile Include="Assets\PlayFabSDK\Experimentation\PlayFabExperimentationInstanceAPI.cs" />
+    <Compile Include="Assets\PlayFabSDK\Data\PlayFabDataModels.cs" />
+    <Compile Include="Assets\PlayFabSDK\Experimentation\PlayFabExperimentationModels.cs" />
+    <Compile Include="Assets\PlayFabSDK\Client\PlayFabDeviceUtil.cs" />
+    <Compile Include="Assets\PlayFabSDK\Matchmaker\PlayFabMatchmakerModels.cs" />
+    <Compile Include="Assets\PlayFabSDK\Shared\Internal\SimpleJson.cs" />
+    <Compile Include="Assets\PlayFabSDK\Insights\PlayFabInsightsModels.cs" />
+    <Compile Include="Assets\PlayFabSDK\Authentication\PlayFabEvents.cs" />
+    <Compile Include="Assets\PlayFabSDK\Client\PlayFabClientAPI.cs" />
+    <Compile Include="Assets\PlayFabSDK\Matchmaker\PlayFabMatchmakerAPI.cs" />
+    <Compile Include="Assets\PlayFabSDK\Authentication\PlayFabAuthenticationAPI.cs" />
+    <Compile Include="Assets\PlayFabSDK\Shared\Public\PlayFabApiSettings.cs" />
+    <Compile Include="Assets\PlayFabSDK\Admin\PlayFabAdminInstanceAPI.cs" />
+    <Compile Include="Assets\PlayFabSDK\Matchmaker\PlayFabMatchmakerInstanceAPI.cs" />
+    <Compile Include="Assets\PlayFabSDK\Multiplayer\PlayFabMultiplayerAPI.cs" />
+    <Compile Include="Assets\PlayFabSDK\Shared\Internal\PlayFabHttp\PlayFabUnityHttp.cs" />
+    <Compile Include="Assets\PlayFabSDK\Server\PlayFabServerModels.cs" />
+    <Compile Include="Assets\PlayFabSDK\Multiplayer\PlayFabMultiplayerInstanceAPI.cs" />
+    <Compile Include="Assets\PlayFabSDK\Shared\Models\PlayFabSharedSettings.cs" />
+    <Compile Include="Assets\PlayFabSDK\Shared\Public\PluginManager.cs" />
+    <Compile Include="Assets\PlayFabSDK\Shared\Internal\PlayFabHttp\PlayFabWWW.cs" />
+    <Compile Include="Assets\PlayFabSDK\Localization\PlayFabLocalizationInstanceAPI.cs" />
+    <Compile Include="Assets\PlayFabSDK\Profiles\PlayFabEvents.cs" />
+    <Compile Include="Assets\PlayFabSDK\Localization\PlayFabEvents.cs" />
+    <Compile Include="Assets\PlayFabSDK\Data\PlayFabEvents.cs" />
+    <Compile Include="Assets\PlayFabSDK\Shared\Internal\PlayFabHttp\IPlayFabHttp.cs" />
+    <Compile Include="Assets\PlayFabSDK\Economy\PlayFabEconomyInstanceAPI.cs" />
+    <Compile Include="Assets\PlayFabSDK\Server\PlayFabServerAPI.cs" />
+    <Compile Include="Assets\PlayFabSDK\Client\PlayFabClientInstanceAPI.cs" />
+    <Compile Include="Assets\PlayFabSDK\Shared\Public\PlayFabEvents.cs" />
+    <Compile Include="Assets\PlayFabSDK\Shared\Internal\ISerializer.cs" />
+    <Compile Include="Assets\PlayFabSDK\Groups\PlayFabGroupsModels.cs" />
+    <Compile Include="Assets\PlayFabSDK\Events\PlayFabEventsModels.cs" />
+    <Compile Include="Assets\PlayFabSDK\Shared\Internal\Util.cs" />
+    <Compile Include="Assets\PlayFabSDK\Economy\PlayFabEconomyModels.cs" />
+    <Compile Include="Assets\PlayFabSDK\Shared\Public\ISerializerPlugin.cs" />
+    <Compile Include="Assets\PlayFabSDK\Economy\PlayFabEvents.cs" />
+    <Compile Include="Assets\PlayFabSDK\Localization\PlayFabLocalizationAPI.cs" />
     <Compile Include="Assets\PlayFabSDK\Groups\PlayFabEvents.cs" />
     <Compile Include="Assets\PlayFabSDK\Shared\Models\SharedModels.cs" />
-    <Compile Include="Assets\PlayFabSDK\Data\PlayFabDataModels.cs" />
     <Compile Include="Assets\PlayFabSDK\Groups\PlayFabGroupsAPI.cs" />
     <Compile Include="Assets\PlayFabSDK\CloudScript\PlayFabCloudScriptAPI.cs" />
     <Compile Include="Assets\PlayFabSDK\Admin\PlayFabAdminModels.cs" />
     <Compile Include="Assets\PlayFabSDK\Shared\Public\PlayFabSettings.cs" />
     <Compile Include="Assets\PlayFabSDK\Insights\PlayFabEvents.cs" />
-    <Compile Include="Assets\PlayFabSDK\Experimentation\PlayFabExperimentationModels.cs" />
     <Compile Include="Assets\PlayFabSDK\Shared\Public\PluginContractKey.cs" />
-    <Compile Include="Assets\PlayFabSDK\Client\PlayFabDeviceUtil.cs" />
     <Compile Include="Assets\PlayFabSDK\Events\PlayFabEventsInstanceAPI.cs" />
-    <Compile Include="Assets\PlayFabSDK\Matchmaker\PlayFabMatchmakerModels.cs" />
-    <Compile Include="Assets\PlayFabSDK\Shared\Internal\SimpleJson.cs" />
     <Compile Include="Assets\PlayFabSDK\Shared\Public\IPlayFabPlugin.cs" />
     <Compile Include="Assets\PlayFabSDK\Entity\ScreenTimeTracker.cs" />
-    <Compile Include="Assets\PlayFabSDK\Insights\PlayFabInsightsModels.cs" />
-    <Compile Include="Assets\PlayFabSDK\Authentication\PlayFabEvents.cs" />
-    <Compile Include="Assets\PlayFabSDK\Client\PlayFabClientAPI.cs" />
     <Compile Include="Assets\PlayFabSDK\CloudScript\PlayFabCloudScriptModels.cs" />
     <Compile Include="Assets\PlayFabSDK\Server\PlayFabServerInstanceAPI.cs" />
     <Compile Include="Assets\PlayFabSDK\Multiplayer\PlayFabMultiplayerModels.cs" />
     <Compile Include="Assets\PlayFabSDK\CloudScript\PlayFabEvents.cs" />
     <Compile Include="Assets\PlayFabSDK\Shared\Internal\SingletonMonoBehaviour.cs" />
     <Compile Include="Assets\PlayFabSDK\CloudScript\PlayFabCloudScriptInstanceAPI.cs" />
-    <Compile Include="Assets\PlayFabSDK\Matchmaker\PlayFabMatchmakerAPI.cs" />
-    <Compile Include="Assets\PlayFabSDK\Authentication\PlayFabAuthenticationAPI.cs" />
-    <Compile Include="Assets\PlayFabSDK\Shared\Public\PlayFabApiSettings.cs" />
-    <Compile Include="Assets\PlayFabSDK\Admin\PlayFabAdminInstanceAPI.cs" />
-    <Compile Include="Assets\PlayFabSDK\Matchmaker\PlayFabMatchmakerInstanceAPI.cs" />
     <Compile Include="Assets\PlayFabSDK\Experimentation\PlayFabEvents.cs" />
-    <Compile Include="Assets\PlayFabSDK\Multiplayer\PlayFabMultiplayerAPI.cs" />
     <Compile Include="Assets\PlayFabSDK\Client\PlayFabEvents.cs" />
     <Compile Include="Assets\PlayFabSDK\Insights\PlayFabInsightsInstanceAPI.cs" />
-    <Compile Include="Assets\PlayFabSDK\Shared\Internal\PlayFabHttp\PlayFabUnityHttp.cs" />
-    <Compile Include="Assets\PlayFabSDK\Server\PlayFabServerModels.cs" />
-    <Compile Include="Assets\PlayFabSDK\Multiplayer\PlayFabMultiplayerInstanceAPI.cs" />
-    <Compile Include="Assets\PlayFabSDK\Shared\Models\PlayFabSharedSettings.cs" />
-    <Compile Include="Assets\PlayFabSDK\Shared\Public\PluginManager.cs" />
     <Compile Include="Assets\PlayFabSDK\Matchmaker\PlayFabEvents.cs" />
     <Compile Include="Assets\PlayFabSDK\Admin\PlayFabEvents.cs" />
-    <Compile Include="Assets\PlayFabSDK\Shared\Internal\PlayFabHttp\PlayFabWWW.cs" />
     <Compile Include="Assets\PlayFabSDK\Shared\Internal\Log.cs" />
-    <Compile Include="Assets\PlayFabSDK\Localization\PlayFabLocalizationInstanceAPI.cs" />
     <Compile Include="Assets\PlayFabSDK\Shared\Public\PlayFabAuthenticationContext.cs" />
-    <Compile Include="Assets\PlayFabSDK\Profiles\PlayFabEvents.cs" />
-    <Compile Include="Assets\PlayFabSDK\Localization\PlayFabEvents.cs" />
     <Compile Include="Assets\PlayFabSDK\Profiles\PlayFabProfilesAPI.cs" />
-    <Compile Include="Assets\PlayFabSDK\Data\PlayFabEvents.cs" />
-    <Compile Include="Assets\PlayFabSDK\Shared\Internal\PlayFabHttp\IPlayFabHttp.cs" />
     <Compile Include="Assets\PlayFabSDK\Shared\Public\PluginContract.cs" />
-    <Compile Include="Assets\PlayFabSDK\Economy\PlayFabEconomyInstanceAPI.cs" />
-    <Compile Include="Assets\PlayFabSDK\Server\PlayFabServerAPI.cs" />
-    <Compile Include="Assets\PlayFabSDK\Client\PlayFabClientInstanceAPI.cs" />
     <Compile Include="Assets\PlayFabSDK\Admin\PlayFabAdminAPI.cs" />
     <Compile Include="Assets\PlayFabSDK\Shared\Public\ITransportPlugin.cs" />
     <Compile Include="Assets\PlayFabSDK\Localization\PlayFabLocalizationModels.cs" />
     <Compile Include="Assets\PlayFabSDK\Data\PlayFabDataInstanceAPI.cs" />
     <Compile Include="Assets\PlayFabSDK\Authentication\PlayFabAuthenticationInstanceAPI.cs" />
-    <Compile Include="Assets\PlayFabSDK\Shared\Public\PlayFabEvents.cs" />
     <Compile Include="Assets\PlayFabSDK\Insights\PlayFabInsightsAPI.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -375,17 +375,8 @@
     <Reference Include="SyntaxTree.VisualStudio.Unity.Bridge">
       <HintPath>C:\Program Files (x86)\Microsoft Visual Studio Tools for Unity\16.0\Editor\SyntaxTree.VisualStudio.Unity.Bridge.dll</HintPath>
     </Reference>
-    <Reference Include="Google.PackageManagerResolver">
-      <HintPath>Assets\ExternalDependencyManager\Editor\1.2.172\Google.PackageManagerResolver.dll</HintPath>
-    </Reference>
     <Reference Include="Google.JarResolver">
       <HintPath>Assets\ExternalDependencyManager\Editor\1.2.172\Google.JarResolver.dll</HintPath>
-    </Reference>
-    <Reference Include="GoogleMobileAds">
-      <HintPath>Assets\GoogleMobileAds\GoogleMobileAds.dll</HintPath>
-    </Reference>
-    <Reference Include="GoogleMobileAds.Unity">
-      <HintPath>Assets\GoogleMobileAds\GoogleMobileAds.Unity.dll</HintPath>
     </Reference>
     <Reference Include="log4netPlastic">
       <HintPath>Library\PackageCache\com.unity.collab-proxy@1.15.18\Lib\Editor\PlasticSCM\log4netPlastic.dll</HintPath>
@@ -393,23 +384,35 @@
     <Reference Include="Unity.Plastic.Newtonsoft.Json">
       <HintPath>Library\PackageCache\com.unity.collab-proxy@1.15.18\Lib\Editor\PlasticSCM\Unity.Plastic.Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="GoogleMobileAds.Core">
-      <HintPath>Assets\GoogleMobileAds\GoogleMobileAds.Core.dll</HintPath>
-    </Reference>
     <Reference Include="Unity.Plastic.Antlr3.Runtime">
       <HintPath>Library\PackageCache\com.unity.collab-proxy@1.15.18\Lib\Editor\PlasticSCM\Unity.Plastic.Antlr3.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="unityplastic">
       <HintPath>Library\PackageCache\com.unity.collab-proxy@1.15.18\Lib\Editor\PlasticSCM\unityplastic.dll</HintPath>
     </Reference>
-    <Reference Include="Google.VersionHandlerImpl">
-      <HintPath>Assets\ExternalDependencyManager\Editor\1.2.172\Google.VersionHandlerImpl.dll</HintPath>
-    </Reference>
     <Reference Include="Google.VersionHandler">
       <HintPath>Assets\ExternalDependencyManager\Editor\Google.VersionHandler.dll</HintPath>
     </Reference>
     <Reference Include="GoogleMobileAds.Common">
       <HintPath>Assets\GoogleMobileAds\GoogleMobileAds.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.PackageManagerResolver">
+      <HintPath>Assets\ExternalDependencyManager\Editor\1.2.172\Google.PackageManagerResolver.dll</HintPath>
+    </Reference>
+    <Reference Include="GoogleMobileAds">
+      <HintPath>Assets\GoogleMobileAds\GoogleMobileAds.dll</HintPath>
+    </Reference>
+    <Reference Include="GoogleMobileAds.Unity">
+      <HintPath>Assets\GoogleMobileAds\GoogleMobileAds.Unity.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>Library\PackageCache\com.unity.nuget.newtonsoft-json@3.0.2\Runtime\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="GoogleMobileAds.Core">
+      <HintPath>Assets\GoogleMobileAds\GoogleMobileAds.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.VersionHandlerImpl">
+      <HintPath>Assets\ExternalDependencyManager\Editor\1.2.172\Google.VersionHandlerImpl.dll</HintPath>
     </Reference>
     <Reference Include="Google.IOSResolver">
       <HintPath>Assets\ExternalDependencyManager\Editor\1.2.172\Google.IOSResolver.dll</HintPath>

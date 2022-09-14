@@ -54,13 +54,12 @@ public class PoopScript : MonoBehaviour
                 gameManager.RemovePrefapList(gameObject);
                 gameManager.AddScoreValue(scoreValue);
             }
-
-
             if(particleOn)
                 for (int i = 0; i < particles.Length; i++)
                 {
                     Instantiate(particles[i], transform.position, Quaternion.identity);
                 }
+            SoundManager.instance.Play("Poop");
             Destroy(gameObject);
         }
         if (collision.tag == "Player")
@@ -68,7 +67,8 @@ public class PoopScript : MonoBehaviour
             if (!isBossPattern)
             {
                 gameManager.RemovePrefapList(gameObject);
-                gameManager.AddMoneyValue(moneyValue);
+                gameManager.AddMoneyValue(moneyValue * (gameManager.curStage + 1));
+                if (moneyValue > 0) SoundManager.instance.Play("CoinGet");
             }
 
             Destroy(gameObject);

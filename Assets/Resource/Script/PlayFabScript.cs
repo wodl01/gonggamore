@@ -13,10 +13,10 @@ public class PlayFabScript : MonoBehaviour
     public GameObject rowPrefab;
     public Transform rowsParent;
 
+    string loggInPlayfabId;
     private void Awake()
     {
         instance = this;
-        Debug.Log(SystemInfo.deviceUniqueIdentifier);
     }
 
     public void Login()
@@ -39,6 +39,7 @@ public class PlayFabScript : MonoBehaviour
     void OnSuccess(LoginResult result)
     {
         MenuManager.instance.loadingPanel.SetActive(false);
+        loggInPlayfabId = result.PlayFabId;
         Debug.Log("Successful Login Create!");
         string name = null;
         if (result.InfoResultPayload.PlayerProfile != null)
@@ -55,6 +56,7 @@ public class PlayFabScript : MonoBehaviour
         else
         {
             menuManager.playerNickNameText.text = name;
+            GameManager.instance.userName = name;
             GameManager.instance.PlayerProfileUpdate();
 
         }
@@ -73,22 +75,6 @@ public class PlayFabScript : MonoBehaviour
         menuManager.nameErrorText.text = error.ErrorMessage;
     }
 
-
-    void GetAppearance()
-    {
-
-    }
-    void SaveAppearance(int lv, int exp)
-    {
-        var request = new UpdateUserDataRequest
-        {
-            Data = new Dictionary<string, string>
-            {
-                { "Lv", lv.ToString() },
-                { "Exp", exp.ToString() }
-            }
-        };
-    }
 
 
     void OnDisplayNameUpdate(UpdateUserTitleDisplayNameResult result) 
@@ -139,6 +125,16 @@ public class PlayFabScript : MonoBehaviour
         PlayFabClientAPI.GetLeaderboard(request, OnLeaderboardGet, OnError);
     }
 
+    public void GetLeaderboardAroundPlayer()
+    {
+        var request = new GetLeaderboardAroundPlayerRequest
+        {
+            StatisticName = "Score",
+            MaxResultsCount = 9
+        };
+        PlayFabClientAPI.GetLeaderboardAroundPlayer(request, OnLeaderboardAroundPlayerGet, OnError);
+    }
+
     void OnLeaderboardGet(GetLeaderboardResult result)
     {
         foreach (Transform item in rowsParent)
@@ -152,6 +148,31 @@ public class PlayFabScript : MonoBehaviour
             texts[0].text = "#" + (item.Position + 1).ToString();
             texts[1].text = item.DisplayName;
             texts[2].text = GameManager.TextChanger(item.StatValue) + "Á¡";
+
+            Debug.Log(item.Position + " " + item.PlayFabId + " " + item.StatValue);
+        }
+    }
+
+    void OnLeaderboardAroundPlayerGet(GetLeaderboardAroundPlayerResult result)
+    {
+        foreach (Transform item in rowsParent)
+        {
+            Destroy(item.gameObject);
+        }
+        foreach (var item in result.Leaderboard)
+        {
+            GameObject newGo = Instantiate(rowPrefab, rowsParent);
+            Text[] texts = newGo.GetComponentsInChildren<Text>();
+            texts[0].text = "#" + (item.Position + 1).ToString();
+            texts[1].text = item.DisplayName;
+            texts[2].text = GameManager.TextChanger(item.StatValue) + "Á¡";
+
+            if(item.PlayFabId == loggInPlayfabId)
+            {
+                texts[0].color = new Color(1, 0, 0.56f);
+                texts[1].color = new Color(1, 0, 0.56f);
+                texts[2].color = new Color(1, 0, 0.56f);
+            }
 
             Debug.Log(item.Position + " " + item.PlayFabId + " " + item.StatValue);
         }

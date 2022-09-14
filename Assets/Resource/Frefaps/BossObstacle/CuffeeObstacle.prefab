@@ -681,6 +681,7 @@ GameObject:
   - component: {fileID: 9022503921434154493}
   - component: {fileID: 4188580351783099366}
   - component: {fileID: 5703247010577036052}
+  - component: {fileID: -6634463346698912203}
   m_Layer: 0
   m_Name: CuffeeObstacle
   m_TagString: Untagged
@@ -751,3 +752,17 @@ MonoBehaviour:
   isBossPattern: 1
   particleOn: 0
   particles: []
+--- !u!114 &-6634463346698912203
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9022503921434154482}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 829a0905d3728e24297c30c91db5d013, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rightBorder: 0.9
+  leftBorder: 0.1

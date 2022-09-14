@@ -12,6 +12,8 @@ using System.Security.Cryptography;
 [System.Serializable]
 public class UserDatas
 {
+    public string deviceId;
+    public bool removeAd;
     public int inGameMoney;
     public int curPlayerLv;
     public int curExp;
@@ -28,6 +30,9 @@ public class UserDatas
 
 public class GameManager : MonoBehaviour
 {
+    public string userName;
+
+
     public static GameManager instance;
     private MenuManager menuManager;
     private PlayFabScript playFabScript;
@@ -101,13 +106,12 @@ public class GameManager : MonoBehaviour
     [SerializeField] Text moneyText;
 
     [Header("Stage")]
-    [SerializeField] private int curStage;
+    public int curStage;
     public bool isPauseGame;
     public bool isRepeatMode;
     [SerializeField] private List<UnityEngine.Vector3> gravityPerStage;
 
     [Header("PlayerLvBalence")]
-
     [SerializeField] int[] maxExp;
     [SerializeField] Sprite[] profileThumbnails;
     [SerializeField] string[] gradeName;
@@ -128,6 +132,7 @@ public class GameManager : MonoBehaviour
 
         instance = this;
         DontDestroyOnLoad(gameObject);
+        
 
         Application.targetFrameRate = 60;
         Screen.sleepTimeout = SleepTimeout.NeverSleep;
@@ -137,7 +142,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         filePath = Application.persistentDataPath + "/WM3ko61Q0t83Uimdwp9ArhkmVE32TvV2.txt";
-
+        SoundManager.instance.PlayRandomBGM();
 #if UNITY_EDITOR
         testMode = true;
 #endif
@@ -145,6 +150,8 @@ public class GameManager : MonoBehaviour
         LoadData();
 
         PlayerProfileUpdate();
+
+        userData.removeAd = true;
     }
 
     public void SaveData()
@@ -165,11 +172,15 @@ public class GameManager : MonoBehaviour
         string jdata = System.Text.Encoding.UTF8.GetString(bytes);
 
         userData = JsonUtility.FromJson<UserDatas>(jdata);
+
+        menuManager.startBtn.interactable = userData.deviceId == SystemInfo.deviceUniqueIdentifier;
     }
     public void ResetDatas()
     {
         userData = new UserDatas();
+        userData.deviceId = SystemInfo.deviceUniqueIdentifier;
 
+        menuManager.startBtn.interactable = userData.deviceId == SystemInfo.deviceUniqueIdentifier;
         SaveData();
         LoadData();
     }
@@ -184,14 +195,18 @@ public class GameManager : MonoBehaviour
         menuManager.playerAbilityInfoText.text = abilityInfo[userData.curPlayerLv];
         menuManager.playerAbilityTitleText.text = "최종점수 +" + bonusValue[userData.curPlayerLv] + "%";
         menuManager.profileThumbnailImage.sprite = profileThumbnails[userData.curPlayerLv];
-        menuManager.expPersentText.text = (((float)userData.curExp / (float)maxExp[userData.curPlayerLv]) * 100).ToString() + "%";
+        menuManager.expPersentText.text = string.Format("{0:0.#}", (((float)userData.curExp / (float)maxExp[userData.curPlayerLv]) * 100)) + "%";
         menuManager.expSlider.value = ((float)userData.curExp / (float)maxExp[userData.curPlayerLv]);
+
+        if (PlayFabClientAPI.IsClientLoggedIn())
+            menuManager.playerNickNameText.text = userName;
     }
 
     public void GameStart()
     {
         bossScript = BossScript.instance;
         inGameManager = InGameManager.instance;
+        inGameManager.UI.SetActive(true);
         scoreText = GameObject.Find("ScoreText").GetComponent<Text>();
         moneyText = GameObject.Find("MoneyText").GetComponent<Text>();
         playerScript = GameObject.Find("Player").GetComponent<PlayerScript>();
@@ -229,9 +244,13 @@ public class GameManager : MonoBehaviour
             summonType = 2;
 
             curChickenTime = maxChickenTime;
+
+            Message("오늘은 치맥이다!!");
         }
 
         userData.maxHeartItemAmount = 0;
+
+
 
         SaveData();
     }
@@ -240,7 +259,7 @@ public class GameManager : MonoBehaviour
     {
         DestroyAllPrefaps();
         summonType = 1;
-
+        restTime = 5;
         curFeverTime = maxfeverTime;
     }
     public void CoffeeTimeStart()
@@ -527,7 +546,7 @@ public class GameManager : MonoBehaviour
         
 
 
-        if (curStage == minScoreToNextStage.Length - 1)
+        if (!isRepeatMode && curStage == minScoreToNextStage.Length - 1)
         {
             Message("그것은 모두 꿈이였다(하드모드)");
             isRepeatMode = true;
@@ -542,7 +561,6 @@ public class GameManager : MonoBehaviour
     {
         if (hp < 1)
         {
-
             if (resurrectionChance)
             {
                 isPauseGame = true;
@@ -609,7 +627,7 @@ public class GameManager : MonoBehaviour
         {
             userData.bonusItemAmount--;
             finalScript.bonusScoreText.gameObject.SetActive(true);
-            finalScript.bonusScoreText.text = "보너스 아이템!" + finalScore + "X2";
+            finalScript.bonusScoreText.text = "보너스 아이템!" + TextChanger(finalScore) + "X2";
             finalScore += finalScore;
         }
         else finalScript.bonusScoreText.gameObject.SetActive(false);
@@ -634,6 +652,8 @@ public class GameManager : MonoBehaviour
                     playerScript.SetInvincibility(true);
                     playerScript.barrier.SetActive(true);
                     userData.noHitItemAmount--;
+
+                    SoundManager.instance.Play("NoHit");
                 }
                 break;
         }
@@ -662,13 +682,15 @@ public class GameManager : MonoBehaviour
     private float curCoffeeCool;
     private float curVirusCool;
 
+    private float restTime;
+
     private void FixedUpdate()
     {
         if (isRepeatMode)
         {
             if(!bossTime)
             curRepeatBossCoolTime -= Time.deltaTime;
-            if(curRepeatBossCoolTime < 0)
+            if(curRepeatBossCoolTime < 0 && summonType != 1)
             {
                 DestroyAllPrefaps();
                 curRepeatBossCoolTime = maxRepeatBossCoolTime;
@@ -764,7 +786,9 @@ public class GameManager : MonoBehaviour
                     curFeverTime -= Time.deltaTime;
                     if (curFeverTime < 0)
                     {
-                        summonType = 0;
+                        restTime -= Time.deltaTime;
+                        if (restTime < 0)
+                            summonType = 0;
                     }
                     break;
                 case 2:

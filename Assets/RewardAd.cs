@@ -49,7 +49,8 @@ public class RewardAd : MonoBehaviour
 
     public void ShowRewardAd()
     {
-        rewardAd.Show();
+        if (!GameManager.instance.userData.removeAd)
+            rewardAd.Show();
         Debug.Log("∫∏ø©¡‹");
         SceneManage.instance.ChangeScene(2);
     }

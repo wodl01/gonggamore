@@ -21,7 +21,8 @@ public class Shop : MonoBehaviour
     private GameObject shopPanel;
     [SerializeField]
     private Text inGameMoneyText;
-
+    [SerializeField]
+    private Button removeAdBtn;
 
 
     [SerializeField]
@@ -42,7 +43,7 @@ public class Shop : MonoBehaviour
             gameManager.SaveData();
     }
 
-    void ShopPanelUpdate()
+    public void ShopPanelUpdate()
     {
         inGameMoneyText.text = "≈Î¿Â¿‹∞Ì:" + GameManager.TextChanger(gameManager.GetInGameMoneyValue()) + "ø¯";
 
@@ -57,6 +58,8 @@ public class Shop : MonoBehaviour
             else
                 curItem.buyButton.interactable = false;
         }
+
+        removeAdBtn.interactable = !gameManager.userData.removeAd;
     }
 
     public void BuyShopItem(int itemCode)

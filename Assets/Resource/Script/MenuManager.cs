@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using PlayFab;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -32,8 +33,9 @@ public class MenuManager : MonoBehaviour
     public Image profileThumbnailImage;
     public Text expPersentText;
     public Slider expSlider;
+    public Button loginBtn;
 
-
+    public Button startBtn;
 
     private void Awake()
     {
@@ -51,6 +53,8 @@ public class MenuManager : MonoBehaviour
         playfabScript.Login();
 
         gameManager.PlayerProfileUpdate();
+
+        
     }
 
     public void LeaderboardBtn()
@@ -58,6 +62,15 @@ public class MenuManager : MonoBehaviour
         gameManager.ActiveOb(leaderboardPanel);
         if (leaderboardPanel.activeSelf)
             playfabScript.GetLeaderboard();
+    }
+
+    public void GetLeaderBoardBtn()
+    {
+        playfabScript.GetLeaderboard();
+    }
+    public void GetLeaderBoardAroundPlayerBtn()
+    {
+        playfabScript.GetLeaderboardAroundPlayer();
     }
 
     public void NickNameConfirmBtn()
@@ -68,5 +81,15 @@ public class MenuManager : MonoBehaviour
     public void GetMoneyTest(int index)
     {
         gameManager.AddInGameMoneyValue(index);
+    }
+
+    public void LoginBtn()
+    {
+        playfabScript.Login();
+    }
+
+    private void FixedUpdate()
+    {
+        loginBtn.interactable = !PlayFabClientAPI.IsClientLoggedIn();
     }
 }

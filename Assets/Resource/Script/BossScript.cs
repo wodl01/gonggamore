@@ -140,6 +140,11 @@ public class BossScript : MonoBehaviour
         bossAnimator.speed = active ? 0 : 1;
     }
 
+    public void PlaySound(string sound)
+    {
+        SoundManager.instance.Play(sound);
+    }
+
     [SerializeField] float rightBorder;
     [SerializeField] float leftBorder;
     private void FixedUpdate()

@@ -1242,6 +1242,13 @@ AnimationClip:
     floatParameter: 0
     intParameter: 9
     messageOptions: 0
+  - time: 15.25
+    functionName: SummonObjectToRandomPos
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 6
+    messageOptions: 0
   - time: 16
     functionName: SummonObjectToRandomPos
     data: 
@@ -1614,13 +1621,6 @@ AnimationClip:
     intParameter: 6
     messageOptions: 0
   - time: 41.033333
-    functionName: SummonObjectToRandomPos
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 6
-    messageOptions: 0
-  - time: 43
     functionName: SummonObjectToRandomPos
     data: 
     objectReferenceParameter: {fileID: 0}
