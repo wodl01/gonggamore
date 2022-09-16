@@ -131,7 +131,10 @@ public class BossScript : MonoBehaviour
     public void SightObUpdate()
     {
         sightGoRight = bossSightOb.transform.position.x < 0;
-        sightSpeed = Random.Range(0.02f, 0.04f);
+        if (!gameManager.isRepeatMode)
+            sightSpeed = Random.Range(0.02f, 0.04f);
+        else
+            sightSpeed = Random.Range(0.03f, 0.06f);
     }
 
     public void StopBoss(bool active)

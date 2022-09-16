@@ -12,8 +12,6 @@ public class RewardAd : MonoBehaviour
     public bool isTestMode;
     //public Text LogText;
     public Button RewardAdsBtn;
-
-    public GameObject testOb;
     void Start()
     {
 
@@ -54,6 +52,11 @@ public class RewardAd : MonoBehaviour
         Debug.Log("∫∏ø©¡‹");
         SceneManage.instance.ChangeScene(2);
     }
-
+    public void ShowRewardAd2()
+    {
+        if (!GameManager.instance.userData.removeAd)
+            rewardAd.Show();
+        Debug.Log("∫∏ø©¡‹");
+    }
     #endregion
 }

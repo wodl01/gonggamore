@@ -3,20 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class IAPManager : MonoBehaviour
-{
-    // Start is called before the first frame update
-    void Start()
+{   
+    public void BuyItem(UnityEngine.Purchasing.Product product)
     {
-        
+        GameManager.instance.userData.removeAd = true;
+        GameManager.instance.SaveData();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-    
-    public void BuyItem(UnityEngine.Purchasing.Product product)
+    public void test()
     {
         GameManager.instance.userData.removeAd = true;
         GameManager.instance.SaveData();

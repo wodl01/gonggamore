@@ -149,7 +149,7 @@ MonoBehaviour:
   fallRandomRange: {x: -0.03, y: -0.06}
   fallSpeed: 0
   moneyValue: 25000
-  scoreValue: 2
+  scoreValue: 5
   isBeAffectedTime: 1
   isBossPattern: 0
   particleOn: 0

@@ -23,7 +23,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4816033712023430826}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -72,8 +72,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -52.82, y: 0}
-  m_SizeDelta: {x: 341.27, y: 100}
+  m_AnchoredPosition: {x: -127, y: 0}
+  m_SizeDelta: {x: 395.53, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4816033713412536025
 CanvasRenderer:
@@ -116,7 +116,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: gonggamore
+  m_Text: "\uB2C9\uB124\uC784\uB2C9\uB124\uC784\uB2C9(2D)"
 --- !u!1 &4816033713911666222
 GameObject:
   m_ObjectHideFlags: 0
@@ -151,8 +151,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -271, y: 0}
-  m_SizeDelta: {x: 240.91, y: 100}
+  m_AnchoredPosition: {x: -405, y: 0}
+  m_SizeDelta: {x: 126.05, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4816033713911666221
 CanvasRenderer:
@@ -195,7 +195,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: '#1'
+  m_Text: '#100'
 --- !u!1 &4816033714011455557
 GameObject:
   m_ObjectHideFlags: 0
@@ -230,8 +230,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 276.34, y: 0}
-  m_SizeDelta: {x: 259.58, y: 100}
+  m_AnchoredPosition: {x: 288, y: 0}
+  m_SizeDelta: {x: 432.84, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4816033714011455552
 CanvasRenderer:
@@ -274,4 +274,4 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 200
+  m_Text: "100\uC5B56000\uB9CC3000"

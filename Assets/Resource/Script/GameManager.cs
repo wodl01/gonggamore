@@ -31,7 +31,7 @@ public class UserDatas
 public class GameManager : MonoBehaviour
 {
     public string userName;
-
+    public static string playfabid;
 
     public static GameManager instance;
     private MenuManager menuManager;
@@ -70,7 +70,7 @@ public class GameManager : MonoBehaviour
 
     [Header("CoolTimes")]
     [SerializeField] private float maxfeverTime;
-    private float curFeverTime;
+    [SerializeField] private float curFeverTime;
 
     [SerializeField] private float maxChickenTime;
     private float curChickenTime;
@@ -150,8 +150,6 @@ public class GameManager : MonoBehaviour
         LoadData();
 
         PlayerProfileUpdate();
-
-        userData.removeAd = true;
     }
 
     public void SaveData()
@@ -244,6 +242,7 @@ public class GameManager : MonoBehaviour
             summonType = 2;
 
             curChickenTime = maxChickenTime;
+            restTime = 4;
 
             Message("오늘은 치맥이다!!");
         }
@@ -259,8 +258,10 @@ public class GameManager : MonoBehaviour
     {
         DestroyAllPrefaps();
         summonType = 1;
-        restTime = 5;
+        restTime = 4;
         curFeverTime = maxfeverTime;
+
+        Message("법인카드를 얻었다!!");
     }
     public void CoffeeTimeStart()
     {
@@ -682,7 +683,7 @@ public class GameManager : MonoBehaviour
     private float curCoffeeCool;
     private float curVirusCool;
 
-    private float restTime;
+    [SerializeField]private float restTime;
 
     private void FixedUpdate()
     {
@@ -770,19 +771,6 @@ public class GameManager : MonoBehaviour
                     }
                     break;
                 case 1:
-                    curMoneyCool -= Time.deltaTime;
-                    curMoney1Cool -= Time.deltaTime;
-                    if (curMoneyCool < 0)
-                    {
-                        SummonFeverMoney();
-                        curMoneyCool = 0.08f;
-                    }
-                    if(curMoney1Cool < 0)
-                    {
-                        SummonFeverMoney2();
-                        curMoney1Cool = 0.1f;
-                    }
-
                     curFeverTime -= Time.deltaTime;
                     if (curFeverTime < 0)
                     {
@@ -790,20 +778,39 @@ public class GameManager : MonoBehaviour
                         if (restTime < 0)
                             summonType = 0;
                     }
+                    else
+                    {
+                        curMoneyCool -= Time.deltaTime;
+                        curMoney1Cool -= Time.deltaTime;
+                        if (curMoneyCool < 0)
+                        {
+                            SummonFeverMoney();
+                            curMoneyCool = 0.08f;
+                        }
+                        if (curMoney1Cool < 0)
+                        {
+                            SummonFeverMoney2();
+                            curMoney1Cool = 0.1f;
+                        }
+                    }
                     break;
                 case 2:
-                    curMoneyCool -= Time.deltaTime;
-                    curMoney1Cool -= Time.deltaTime;
-                    if (curMoneyCool < 0)
-                    {
-                        SummonChicken();
-                        curMoneyCool = 0.05f;
-                    }
-
                     curChickenTime -= Time.deltaTime;
                     if (curChickenTime < 0)
                     {
-                        summonType = 0;
+                        restTime -= Time.deltaTime;
+                        if (restTime < 0)
+                            summonType = 0;
+                    }
+                    else
+                    {
+                        curMoneyCool -= Time.deltaTime;
+                        curMoney1Cool -= Time.deltaTime;
+                        if (curMoneyCool < 0)
+                        {
+                            SummonChicken();
+                            curMoneyCool = 0.05f;
+                        }
                     }
                     break;
             }

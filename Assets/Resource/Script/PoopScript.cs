@@ -67,7 +67,10 @@ public class PoopScript : MonoBehaviour
             if (!isBossPattern)
             {
                 gameManager.RemovePrefapList(gameObject);
-                gameManager.AddMoneyValue(moneyValue * (gameManager.curStage + 1));
+                if (!gameManager.isRepeatMode)
+                    gameManager.AddMoneyValue(moneyValue * (gameManager.curStage + 1));
+                else
+                    gameManager.AddMoneyValue(moneyValue * 10);
                 if (moneyValue > 0) SoundManager.instance.Play("CoinGet");
             }
 

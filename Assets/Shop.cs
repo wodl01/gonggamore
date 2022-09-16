@@ -60,6 +60,7 @@ public class Shop : MonoBehaviour
         }
 
         removeAdBtn.interactable = !gameManager.userData.removeAd;
+        removeAdBtn.transform.GetChild(1).GetComponent<Text>().text = gameManager.userData.removeAd ? "구매완료" : "구매하기";
     }
 
     public void BuyShopItem(int itemCode)

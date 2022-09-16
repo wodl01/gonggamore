@@ -12,11 +12,12 @@ public class PlayFabScript : MonoBehaviour
 
     public GameObject rowPrefab;
     public Transform rowsParent;
-
-    string loggInPlayfabId;
+    
     private void Awake()
     {
         instance = this;
+
+        Login();
     }
 
     public void Login()
@@ -39,7 +40,10 @@ public class PlayFabScript : MonoBehaviour
     void OnSuccess(LoginResult result)
     {
         MenuManager.instance.loadingPanel.SetActive(false);
-        loggInPlayfabId = result.PlayFabId;
+
+        GameManager.playfabid = result.PlayFabId;
+
+
         Debug.Log("Successful Login Create!");
         string name = null;
         if (result.InfoResultPayload.PlayerProfile != null)
@@ -80,7 +84,6 @@ public class PlayFabScript : MonoBehaviour
     void OnDisplayNameUpdate(UpdateUserTitleDisplayNameResult result) 
     {
         Debug.Log("Update display name!");
-        //MenuManager.instance.debugText.text = "Update display name!";
         menuManager.nickNamePanel.SetActive(false);
         menuManager.playerNickNameText.text = menuManager.nameInputField.text + "(" + SystemInfo.deviceUniqueIdentifier.Substring(0, 2) + ")";
     }
@@ -147,7 +150,7 @@ public class PlayFabScript : MonoBehaviour
             Text[] texts = newGo.GetComponentsInChildren<Text>();
             texts[0].text = "#" + (item.Position + 1).ToString();
             texts[1].text = item.DisplayName;
-            texts[2].text = GameManager.TextChanger(item.StatValue) + "Á¡";
+            texts[2].text = GameManager.TextChanger(item.StatValue);
 
             Debug.Log(item.Position + " " + item.PlayFabId + " " + item.StatValue);
         }
@@ -165,16 +168,13 @@ public class PlayFabScript : MonoBehaviour
             Text[] texts = newGo.GetComponentsInChildren<Text>();
             texts[0].text = "#" + (item.Position + 1).ToString();
             texts[1].text = item.DisplayName;
-            texts[2].text = GameManager.TextChanger(item.StatValue) + "Á¡";
-
-            if(item.PlayFabId == loggInPlayfabId)
+            texts[2].text = GameManager.TextChanger(item.StatValue);
+            if (item.PlayFabId == GameManager.playfabid)
             {
                 texts[0].color = new Color(1, 0, 0.56f);
                 texts[1].color = new Color(1, 0, 0.56f);
                 texts[2].color = new Color(1, 0, 0.56f);
             }
-
-            Debug.Log(item.Position + " " + item.PlayFabId + " " + item.StatValue);
         }
     }
 }

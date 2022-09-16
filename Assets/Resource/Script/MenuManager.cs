@@ -50,7 +50,8 @@ public class MenuManager : MonoBehaviour
 
         playfabScript.rowsParent = rowsParent;
 
-        playfabScript.Login();
+
+       // playfabScript.Login();
 
         gameManager.PlayerProfileUpdate();
 
