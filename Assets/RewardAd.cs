@@ -56,7 +56,14 @@ public class RewardAd : MonoBehaviour
     {
         if (!GameManager.instance.userData.removeAd)
             rewardAd.Show();
+        MenuManager.instance.nickNamePanel.SetActive(true);
         Debug.Log("∫∏ø©¡‹");
     }
     #endregion
+
+    private void FixedUpdate()
+    {
+        if(RewardAdsBtn)
+        RewardAdsBtn.interactable = rewardAd.IsLoaded();
+    }
 }
